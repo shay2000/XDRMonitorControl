@@ -7,6 +7,26 @@
 
 <br/><br/>
 
+> [!CAUTION]
+> **Branch notice — `claude/hdr-xdr-monitor-control-xFD6X`**
+>
+> This branch adds a **new XDR/HDR force-brightness engine** ported from
+> [BrightIntosh](https://github.com/niklasr22/BrightIntosh) (GPLv3, by Niklas Rousset).
+> It is **experimental** and has **not yet been verified on real XDR hardware** from
+> this branch. The engine ships as `MonitorControl/Support/XDRBrightness.swift` and is
+> wired into `AppleDisplay.setDirectBrightness()` and `AppDelegate`'s display/wake hooks.
+>
+> The mechanism works by:
+> 1. Rendering an invisible 1×1 px Metal overlay with EDR content to keep the display
+>    in extended-dynamic-range mode, and
+> 2. Multiplying the display's gamma LUT by up to **1.59×** via `CGSetDisplayTransferByTable`.
+>
+> **Risks:** increased heat, faster battery drain, potential colour-accuracy deviation
+> while active, and brief visual artefacts during screen reconfiguration. The
+> BrightIntosh licence is **GPLv3**, which differs from this repo's MIT licence — see the
+> file header in `XDRBrightness.swift` for attribution. Do not ship this branch in
+> production builds without resolving the licence question.
+
 <div align="center">
 <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt"><img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/></a>
 <a href="https://github.com/MonitorControl/MonitorControl"><img src="https://img.shields.io/badge/platform-macOS-blue.svg?style=flat" alt="platform"/></a>
