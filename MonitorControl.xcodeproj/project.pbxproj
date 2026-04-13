@@ -38,6 +38,7 @@
 		AA78BDBD2709FE7B00CA8DF7 /* UpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78BDBC2709FE7B00CA8DF7 /* UpdaterDelegate.swift */; };
 		AA99521726FE25AB00612E07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA99521626FE25AB00612E07 /* AppDelegate.swift */; };
 		AA99521926FE49A300612E07 /* MenuHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA99521826FE49A300612E07 /* MenuHandler.swift */; };
+		AAXDR00001234567890ABCD01 /* XDRBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAXDR00001234567890ABCD00 /* XDRBrightness.swift */; };
 		AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */; };
 		AA9AE87126B5BFB700B6CA65 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */; };
 		AAB2F638273ED099004AB5A4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = AAB2F637273ED099004AB5A4 /* .swiftlint.yml */; };
@@ -125,6 +126,7 @@
 		AA90102027C56A0E00CC1DF7 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA99521626FE25AB00612E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA99521826FE49A300612E07 /* MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHandler.swift; sourceTree = "<group>"; };
+		AAXDR00001234567890ABCD00 /* XDRBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDRBrightness.swift; sourceTree = "<group>"; };
 		AA99E81527622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		AA99E81627622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
 		AA99E81727622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				F01B0685228221B6008E64DB /* Bridging-Header.h */,
 				AA99521626FE25AB00612E07 /* AppDelegate.swift */,
+				AAXDR00001234567890ABCD00 /* XDRBrightness.swift */,
 				AA78BDBC2709FE7B00CA8DF7 /* UpdaterDelegate.swift */,
 				AA99521826FE49A300612E07 /* MenuHandler.swift */,
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
@@ -677,6 +680,7 @@
 				AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */,
 				AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */,
 				6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */,
+				AAXDR00001234567890ABCD01 /* XDRBrightness.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

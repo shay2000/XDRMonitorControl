@@ -118,6 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func displayReconfigured() {
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     CGDisplayRestoreColorSyncSettings()
+    Task { @MainActor in XDRBrightnessController.shared.handleScreenParametersChanged() }
     self.reconfigureID += 1
     self.updateMediaKeyTap()
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
@@ -198,6 +199,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
+      Task { @MainActor in XDRBrightnessController.shared.handleScreensDidWake() }
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))

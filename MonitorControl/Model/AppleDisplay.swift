@@ -52,6 +52,7 @@ class AppleDisplay: Display {
 
   func disableXDR() {
     self.savePref(false, key: .xdrEnabled)
+    Task { @MainActor in self.disableXDRController() }
     _ = self.setBrightness(1.0)
     DispatchQueue.main.async {
       app.updateMenusAndKeys()
@@ -81,7 +82,17 @@ class AppleDisplay: Display {
       return false
     }
     let value = max(min(to, self.effectiveBrightnessMax), 0)
-    self.setAppleBrightness(value: value)
+    if value > 1.0 && self.isXDRCapable && self.readPrefAsBool(key: .xdrEnabled) {
+      // Values above 1.0 go through the XDR gamma-LUT multiplier.
+      // The system brightness is pinned at 1.0 (full SDR) while the
+      // XDR controller handles the extra headroom via its gamma table.
+      self.setAppleBrightness(value: 1.0)
+      Task { @MainActor in
+        XDRBrightnessController.shared.setBrightness(value)
+      }
+    } else {
+      self.setAppleBrightness(value: value)
+    }
     if !transient {
       self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
@@ -126,5 +137,28 @@ class AppleDisplay: Display {
       return newValue - oldValue
     }
     return 0
+  }
+}
+
+// MARK: - XDR enable/disable helpers
+
+extension AppleDisplay {
+  /// Activates the Metal EDR overlay + gamma-LUT multiplier via XDRBrightnessController.
+  @MainActor func enableXDR() {
+    self.savePref(true, key: .xdrEnabled)
+    XDRBrightnessController.shared.enable()
+    DispatchQueue.main.async { app.updateMenusAndKeys() }
+  }
+
+  /// Shuts down the overlay and restores the original gamma LUT.
+  /// Only disables the shared controller when no other Apple display still has XDR on.
+  @MainActor func disableXDRController() {
+    let anyOtherXdrEnabled = DisplayManager.shared.displays
+      .compactMap { $0 as? AppleDisplay }
+      .filter { $0 !== self }
+      .contains { $0.isXDRCapable && $0.readPrefAsBool(key: .xdrEnabled) }
+    if !anyOtherXdrEnabled {
+      XDRBrightnessController.shared.disable()
+    }
   }
 }
